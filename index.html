@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title>Bemilanche</title>
+		<style>
+			#gamecanvas {
+				background: #eee;
+			}
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="gamecanvas"></canvas>
+		<button id="startgame" onclick="ToggleLive()">Start</button>
+		<button id="newblock" onclick="blocks.push(new Block())">New Block</button>
+		<button id="newplayer" onclick="SpawnPlayer()">New Player</button>
+		<input type="range" id="framerate" value="90">
+	</body>
+	<script src="init.js"></script>
+	<script src="block.js"></script>
+	<script src="player.js"></script>
+	<script src="game.js"></script>
+</html>
