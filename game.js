@@ -5,11 +5,18 @@ const GameStatus = {
 	live: false
 }
 
+const Curtain = {
+	progress: -200,
+	draw(ctx) {
+		ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+		ctx.fillRect(0, -Viewport.y + Viewport.height, Viewport.width, -this.progress);
+	}
+}
+
 const framerateInput = document.getElementById("framerate");
 framerateInput.value = Math.sqrt(GameStatus.framerate * 10).toString();
 framerateInput.addEventListener("input", e => {
 	GameStatus.framerate = Math.pow(e.target.value, 2) / 10;
-	console.log(GameStatus.framerate);
 });
 
 function StartGame() {
@@ -17,6 +24,7 @@ function StartGame() {
 }
 
 function UpdateGame() {
+	if (Math.random() < 0.008) SpawnBlock();
 	if (GameStatus.live) setTimeout(UpdateGame, GameStatus.framerate);
 	ctx.clearRect(0, 0, Viewport.width, Viewport.height);
 
@@ -26,7 +34,6 @@ function UpdateGame() {
 		player.update();
 	});
 
-	ctx.fillStyle = "#cbcbcb";
 	blocks.forEach(block => {
 		block.update();
 		block.draw(ctx);
@@ -38,6 +45,9 @@ function UpdateGame() {
 		player.updateX();
 		player.draw(ctx);
 	});
+	Curtain.progress += 0.3;
+	Curtain.draw(ctx);
+	scoreElem.innerHTML = players.sort((e, a) => e.score < a.score).map((e, n) => `<span ${e.alive ? '' : 'class="dead"'}>Player ${n}: ${e.score}</span>`).join("<br />");
 }
 
 function ToggleLive() {

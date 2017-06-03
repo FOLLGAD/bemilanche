@@ -2,6 +2,12 @@ const blocksizes = [{ width: 200, height: 200 }, { width: 100, height: 100 }];
 
 class Block {
 	constructor() {
+		let color = Math.floor(Math.random()*255).toString(16);
+		if (color.length !== 6) color = color + 0;
+		color = "#" + color;
+
+		this.color = color;
+
 		const { width, height } = blocksizes[Math.random() * 2 | 0];
 		this.width = width;
 		this.height = height;
@@ -11,7 +17,7 @@ class Block {
 		}
 		this.vel = {
 			x: 0,
-			y: -Math.random() * 2 - 1
+			y: -Math.random() * 5 - 3
 		};
 	}
 	update() {
@@ -33,6 +39,7 @@ class Block {
 			this.pos.y < obj.pos.y + obj.height && this.pos.y > obj.pos.y;
 	}
 	draw(ctx) {
+		ctx.fillStyle = this.color;
 		ctx.fillRect(this.pos.x - Viewport.x, Viewport.height - this.height - this.pos.y - Viewport.y, this.width, this.height);
 	}
 }
