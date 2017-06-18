@@ -1,36 +1,98 @@
 <html>
 
 	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
 		<title>Bemilanche</title>
 		<style>
-			#gamecanvas {
-				background: #eee;
+			html {
+				box-sizing: border-box;
 			}
 
-			html,
+			html * {
+				box-sizing: inherit;
+			}
+
+			#gamecanvas {
+				background: #fff;
+			}
+
 			body {
 				margin: 0;
 				padding: 0;
+				background: #ccc;
+				font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 			}
+
 			span.dead {
 				color: red;
+			}
+
+			button {
+				background: #ebebeb;
+				border: 1px solid #dddddd;
+				padding: 5px;
+				margin-right: 10px;
+			}
+
+			.button-input>* {
+				height: 35px;
+				border: 1px solid #dddddd;
+			}
+
+			.button-input input {
+				padding: 8px;
+				margin: 0;
+			}
+
+			.button-input button {
+				margin: 0;
+				padding: 8px;
+			}
+
+			.button-input .attach-right {
+				border-right: none;
+			}
+
+			#gamemenu {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+			}
+
+			#gamemenu>div {
+				margin-left: auto;
+				margin-right: auto;
+				width: 400px;
+			}
+
+			h1, h2 {
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			}
+			ul#playerlist {
+				padding-left: 10px;
+				list-style: none;
 			}
 		</style>
 	</head>
 
 	<body>
 		<canvas id="gamecanvas"></canvas>
-		<div>
-			<p id="score"></p>
-			<button id="startgame" onclick="ToggleLive()">Start</button>
-			<button id="newblock" onclick="blocks.push(new Block())">New Block</button>
-			<button id="newplayer" onclick="SpawnPlayer()">New Player</button>
-			<input type="range" id="framerate" value="90">
+		<div id="gamemenu">
+			<div>
+				<button id="start">Start</button>
+				<br />
+				<div class="button-input">
+					<input class="attach-right" value="" id="name" placeholder="Player name" /><button class="attach-left" id="newplayer">New Player</button>
+				</div>
+				<h2>Players</h2>
+				<ul id="playerlist">
+				</ul>
+			</div>
 		</div>
+		</canvas>
 	</body>
-	<script src="init.js"></script>
-	<script src="block.js"></script>
-	<script src="player.js"></script>
-	<script src="game.js"></script>
+	<script src="/bundle.js"></script>
 
 </html>
