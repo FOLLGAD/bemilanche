@@ -3,7 +3,9 @@ const app = express()
 const path = require("path")
 
 let port = 8080;
+
 const index = process.argv.indexOf("-port");
+
 if (index !== -1) {
 	let newport = process.argv[index + 1]
 	if (!isNaN(port)) port = newport;

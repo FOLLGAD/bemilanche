@@ -63,7 +63,7 @@ export default class Player {
 		const posx = this.pos.x - Viewport.x;
 		const posy = Viewport.height - this.height - this.pos.y - Viewport.y;
 		ctx.fillRect(posx, posy, this.width, this.height);
-		ctx.fillStyle = this.onGround ? "black" : "white";
+		// ctx.fillStyle = this.onGround ? "black" : "white";
 		ctx.fillRect(posx, posy + this.height * (2 / 3), this.width, this.height / 3);
 	}
 	die() {

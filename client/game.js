@@ -1,7 +1,8 @@
 import Block from "./block.js"
 import Player from "./player.js"
 import Color from "color"
-window.Color = Color;
+
+window.Color = Color; // for testing purposes
 
 export default class Game {
 	constructor({ ctx, canvas, onEnd }) {
@@ -22,7 +23,7 @@ export default class Game {
 
 		this.Map = {
 			width: 1500,
-			height: Infinity,
+			height: Infinity, // xd
 			Floor: {
 				color: "#526C77",
 			},
@@ -50,7 +51,7 @@ export default class Game {
 
 		this.Water = {
 			progress: -200,
-			progression: 0.5,
+			speed: 0.5,
 			color: Color("#9FDDF9").alpha(0.4),
 			draw(ctx) {
 				ctx.fillStyle = this.color;
@@ -108,16 +109,22 @@ export default class Game {
 			this.live = false;
 		}
 
-		this.Blocks.map(block => {
+		this.Blocks.forEach(block => {
 			block.update();
 
 			if (block.pos.y < 0) {
 				block.pos.y = 0;
 				block.vel.y = 0;
+				block.isGrounded = true;
 			}
+
 			this.Blocks
 				.filter(b => b !== block)
-				.filter(block.isColliding.bind(block))
+				.filter(b => {
+					let col = block.isColliding(b)
+					if (col && b.isGrounded) block.isGrounded = true;
+					return col;
+				})
 				.map(colblock => {
 					block.pos.y = colblock.pos.y + colblock.height;
 					block.vel.y = colblock.vel.y;
@@ -216,7 +223,17 @@ export default class Game {
 			player.draw({ ctx: this.ctx, Viewport: this.Viewport });
 		});
 
-		this.Water.progress += this.Water.progression;
+		let highestBlockPos = this.Blocks.filter(b => b.isGrounded).map(b => b.pos.y).sort().pop()
+
+		let waterBlockDiff = highestBlockPos - this.Water.progress
+
+		if (waterBlockDiff) {
+			this.Water.speed = Math.pow(2, waterBlockDiff / 100) / 10 + 0.3
+		} else {
+			this.Water.speed = 0.1;
+		}
+
+		this.Water.progress += this.Water.speed;
 
 		this.Map.draw(this.ctx);
 		this.Water.draw(this.ctx);

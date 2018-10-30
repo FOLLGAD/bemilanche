@@ -5,15 +5,16 @@ export default class Block {
 		const blocksizes = [{ width: 200, height: 200 }, { width: 120, height: 120 }, { width: 60, height: 150 }];
 
 		this.color = Color("#B8E4F9").desaturate(0.5).hex();
+		this.isGrounded = false;
 
-		const { width, height } = blocksizes[Math.random() * blocksizes.length | 0];
+		const { width, height } = blocksizes[Math.random() * blocksizes.length | 0]; // Take a random block
 		this.width = width;
 		this.height = height;
 
 		this.pos = pos;
 		this.vel = {
 			x: 0,
-			y: -Math.random() * 5 - 3
+			y: -Math.random() * 5 - 3 // Random number between -3 and -8
 		};
 	}
 	update() {
@@ -25,6 +26,7 @@ export default class Block {
 	}
 	draw({ ctx, Viewport }) {
 		ctx.fillStyle = this.color;
+		if (this.isGrounded) ctx.fillStyle = "#bada55"
 		ctx.fillRect(this.pos.x - Viewport.x, Viewport.height - this.height - this.pos.y - Viewport.y, this.width, this.height);
 	}
 }
