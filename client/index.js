@@ -1,11 +1,13 @@
-import Game from "./game"
-import Color from "color"
+import game from "./game";
 
-let game = false;
+let gameIsOn = false;
 
+/**
+ * Start the game
+ */
 function startGame() {
-	if (game === true) return;
-	else game = true;
+	if (gameIsOn === true) return;
+	else gameIsOn = true;
 
 	const canvas = document.getElementById("gamecanvas");
 	const ctx = canvas.getContext("2d");
@@ -20,37 +22,31 @@ function startGame() {
 
 	function onEnd() {
 		gamemenu.style.display = "block";
-		gameInstance = new Game({ ctx, canvas, onEnd })
+		gameInstance = new game({ ctx, canvas, onEnd })
 		updatePlayers();
 	}
 
-	let gameInstance = new Game({ ctx, canvas, onEnd });
+	let gameInstance = new game({ ctx, canvas, onEnd });
 
 	canvas.height = gamemenu.style.height = gameInstance.Viewport.height;
 	canvas.width = gamemenu.style.width = gameInstance.Viewport.width;
 
 	elements.startgame.addEventListener("click", start);
-	function start(e) {
-		// if (gameInstance.Players === 0) return;
-		gameInstance.StartGame();
+	function start() {
+		if (gameInstance.Players.length === 0) return;
+		gameInstance.startGame();
 		gamemenu.style.display = "none";
 	}
 	elements.newplayer.addEventListener("click", newPlayer);
 
-	function newPlayer(e) {
+	function newPlayer() {
 		const keys = [
-			{ jump: "Space", right: "KeyD", left: "KeyA" },
-			{ jump: "Numpad0", right: "ArrowRight", left: "ArrowLeft" },
+			{ jump: "KeyW", right: "KeyD", left: "KeyA" },
+			{ jump: "ArrowUp", right: "ArrowRight", left: "ArrowLeft" },
 			{ jump: "KeyI", right: "KeyL", left: "KeyJ" }
 		][gameInstance.Players.length];
-		const color = [
-			Color("#9a4c95"),
-			Color("#1d1a31"),
-			Color("#d2d4c8"),
-			Color("#a5243d"),
-			Color("#b9cfd4")
-		][gameInstance.Players.length]
-		gameInstance.AddPlayer({ name: elements.name.value, keys, color });
+		
+		gameInstance.addPlayer({ name: elements.name.value, keys });
 		updatePlayers();
 	}
 	function updatePlayers() {
@@ -60,4 +56,4 @@ function startGame() {
 	}
 }
 
-startGame();
+startGame(); // Start an instance

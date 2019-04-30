@@ -7,8 +7,8 @@ let port = 8080;
 const index = process.argv.indexOf("-port");
 
 if (index !== -1) {
-	let newport = process.argv[index + 1]
-	if (!isNaN(port)) port = newport;
+	let newport = process.argv[index + 1] // Get port out of args
+	if (!isNaN(port)) port = newport; // Confirm that the port is a valid one
 }
 
 app.use(function (req, res, next) {
@@ -17,7 +17,7 @@ app.use(function (req, res, next) {
 })
 
 app.get("/", function (req, res) {
-	res.sendFile(path.join(__dirname, "index.html"))
+	res.sendFile(path.join(__dirname, "index.html")) // Serve the index page, which includes the game bundle
 })
 
 app.get("/delay", function (req, res) {
@@ -26,8 +26,8 @@ app.get("/delay", function (req, res) {
 	}, 2500)
 })
 
-app.use(express.static("build"));
+app.use(express.static("build")); // Set build as a static serve dir, making the bundle.js accessible from "/bundle.js"
 
 app.listen(port, () => {
-	console.log("Bemilanche running on port " + port)
+	console.log("Bemilanche running on port " + port) // Log the port
 })
