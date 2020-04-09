@@ -1,8 +1,7 @@
 import color from "color";
 
 export default class player {
-	constructor({ pos = { x: 50, y: 0 }, name = "Player", keys = { jump: "Space", left: "KeyA", right: "KeyD" }, colorPulse }) {
-		this.name = name;
+	constructor({ pos = { x: 50, y: 0 }, keys = { jump: "Space", left: "KeyA", right: "KeyD" }, colorPulse }) {
 		this.pos = pos;
 		this.vel = {
 			x: 0,

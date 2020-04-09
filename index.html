@@ -1,96 +1,105 @@
 <html>
 
-	<head>
-		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-		<meta content="utf-8" http-equiv="encoding">
-		<title>Bemilanche</title>
-		<style>
-			html {
-				box-sizing: border-box;
-			}
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<title>Bemilanche</title>
+	<style>
+		html {
+			box-sizing: border-box;
+		}
 
-			html * {
-				box-sizing: inherit;
-			}
+		html * {
+			box-sizing: inherit;
+		}
 
-			#gamecanvas {
-				background: #fff;
-			}
+		#gamecanvas {
+			background: #fff;
+		}
 
-			body {
-				margin: 0;
-				padding: 0;
-				background: #ccc;
-				font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
-			}
+		body {
+			margin: 0;
+			padding: 0;
+			background: #ccc;
+			font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+		}
 
-			span.dead {
-				color: red;
-			}
+		span.dead {
+			color: red;
+		}
 
-			button {
-				background: #ebebeb;
-				border: 1px solid #dddddd;
-				padding: 5px;
-				margin-right: 10px;
-			}
+		button {
+			background: #ebebeb;
+			border: 1px solid #dddddd;
+			margin-right: 10px;
+		}
 
-			.button-input>* {
-				height: 35px;
-				border: 1px solid #dddddd;
-			}
+		.button-input>* {
+			height: 35px;
+			border: 1px solid #dddddd;
+		}
 
-			.button-input input {
-				padding: 8px;
-				margin: 0;
-			}
+		.button-input input {
+			padding: 8px;
+			margin: 0;
+		}
 
-			.button-input button {
-				margin: 0;
-				padding: 8px;
-			}
+		.button-input button {
+			margin: 0;
+		}
 
-			.button-input .attach-right {
-				border-right: none;
-			}
+		.button-input .attach-right {
+			border-right: none;
+		}
 
-			#gamemenu {
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 0;
-			}
+		.button-input .attach-left {
+			border-left: none;
+		}
 
-			#gamemenu>div {
-				margin-left: auto;
-				margin-right: auto;
-				width: 400px;
-			}
+		#gamemenu {
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+		}
 
-			h1, h2 {
-				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-			}
-			ul#playerlist {
-				padding-left: 10px;
-				list-style: none;
-			}
-		</style>
-	</head>
+		#gamemenu>div {
+			margin-left: auto;
+			margin-right: auto;
+			width: 400px;
+		}
 
-	<body>
-		<canvas id="gamecanvas"></canvas>
-		<div id="gamemenu">
-			<div>
-				<div class="button-input">
-					<input class="attach-right" value="" id="name" placeholder="Player name" /><button class="attach-left" id="newplayer">New Player</button>
-				</div>
-				<h2>Players</h2>
-				<ul id="playerlist">
-				</ul>
-				<button id="start">Start</button>
+		h1,
+		h2 {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		ul#playerlist {
+			padding-left: 10px;
+			list-style: none;
+		}
+
+		.player-controls {
+			width: 50px;
+		}
+		button.player-controls {
+			width: 35px;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas id="gamecanvas"></canvas>
+	<div id="gamemenu">
+		<div>
+			<div class="button-input">
+				<button class="player-controls" id="player-minus">-</button><input value="1" id="players" class="player-controls" readonly /><button class="player-controls" id="player-plus">+</button>
 			</div>
+
+			<button id="start">Start</button>
 		</div>
-	</body>
-	<script src="/bundle.js"></script>
+	</div>
+</body>
+<script src="/bundle.js"></script>
 
 </html>

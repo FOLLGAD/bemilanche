@@ -15,13 +15,17 @@ let pulseInterval = Date.now();
  */
 export default class game {
 	constructor({ ctx, canvas, onEnd }) {
+		document.addEventListener("keydown", this.eventHandler.bind(this));
+		document.addEventListener("keyup", this.eventHandler.bind(this));
+
 		this.ctx = ctx;
 		this.canvas = canvas;
 		this.onEnd = onEnd;
 
-		document.addEventListener("keydown", this.eventHandler.bind(this));
-		document.addEventListener("keyup", this.eventHandler.bind(this));
+		this.init()
+	}
 
+	init() {
 		this.Blocks = [];
 		this.Players = [];
 
@@ -32,7 +36,7 @@ export default class game {
 
 		this.Map = {
 			width: 2000,
-			height: Infinity, // xd
+			height: Infinity,
 			Floor: {
 				color: "#526C77",
 			},
@@ -100,8 +104,8 @@ export default class game {
 		});
 	}
 
-	addPlayer({ name, keys }) {
-		const player = new playerClass({ colorPulse: new colorPulse(randomizeColor(), pulseInterval), keys, name, pos: { x: (this.Map.width - 50) * Math.random(), y: 0 } });
+	addPlayer({ keys }) {
+		const player = new playerClass({ colorPulse: new colorPulse(randomizeColor(), pulseInterval), keys, pos: { x: (this.Map.width - 50) * Math.random(), y: 0 } });
 		player.alive = true;
 		this.Players.push(player);
 	}
@@ -329,7 +333,7 @@ export default class game {
 
 		// Score printing
 		this.ctx.fillStyle = "#c3c3c320";
-		this.ctx.font = "512px sans-serif";
+		this.ctx.font = "400px sans-serif";
 		this.ctx.textAlign = "center";
 		this.ctx.fillText(this.maxScore() / 10 | 0, this.Viewport.width / 2, this.Viewport.height * 2 / 3 + 20);
 
