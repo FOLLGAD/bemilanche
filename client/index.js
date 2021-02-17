@@ -39,6 +39,8 @@ function startGame() {
 		if (d <= maxPlayers && d > 0) {
 			players = d
 			elements.players.value = d
+			gameInstance.Players = []
+			for (let i = 0; i < d; i++) gameInstance.addPlayer({ keys:controls[i] })
 		}
 	}
 
