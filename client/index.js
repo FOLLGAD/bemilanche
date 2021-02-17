@@ -66,7 +66,7 @@ function startGame() {
 		gameInstance.startGame();
 		gamemenu.style.display = "none";
 	}
-	elements.newplayer.addEventListener("click", newPlayer);
+	//elements.newplayer.addEventListener("click", newPlayer);
 
 	function newPlayer() {
 		gameInstance.addPlayer({ name: elements.name.value, keys });
