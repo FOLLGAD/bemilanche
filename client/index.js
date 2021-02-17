@@ -1,5 +1,4 @@
 import game from "./game"
-import color from "color"
 
 let gameIsOn = false;
 
@@ -19,7 +18,8 @@ const maxPlayers = controls.length
  */
 function startGame() {
 	if (gameIsOn) return;
-	else gameIsOn = true;
+
+	gameIsOn = true;
 
 	const canvas = document.getElementById("gamecanvas");
 	const ctx = canvas.getContext("2d");
@@ -40,7 +40,7 @@ function startGame() {
 			players = d
 			elements.players.value = d
 			gameInstance.Players = []
-			for (let i = 0; i < d; i++) gameInstance.addPlayer({ keys:controls[i] })
+			for (let i = 0; i < d; i++) gameInstance.addPlayer({ keys: controls[i] })
 		}
 	}
 
@@ -54,7 +54,6 @@ function startGame() {
 	function onEnd() {
 		gamemenu.style.display = "block";
 		gameInstance = new game({ ctx, canvas, onEnd })
-		updatePlayers();
 	}
 
 	let gameInstance = new game({ ctx, canvas, onEnd });
@@ -69,10 +68,6 @@ function startGame() {
 		gamemenu.style.display = "none";
 	}
 	//elements.newplayer.addEventListener("click", newPlayer);
-
-	function newPlayer() {
-		gameInstance.addPlayer({ name: elements.name.value, keys });
-	}
 }
 
 startGame(); // Start an instance
