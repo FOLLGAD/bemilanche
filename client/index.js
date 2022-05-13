@@ -63,7 +63,9 @@ function startGame() {
 
 	elements.startgame.addEventListener("click", start);
 	function start() {
-		if (gameInstance.Players.length === 0) return;
+		if (gameInstance.Players.length === 0) {
+                      changePlayers(1)
+                }
 		gameInstance.startGame();
 		gamemenu.style.display = "none";
 	}
