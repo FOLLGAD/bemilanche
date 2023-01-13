@@ -25,7 +25,7 @@
 		"babel-preset-es2016": "^6.24.1",
 		"babel-preset-es2017": "^6.24.1",
 		"webpack": "^4.23.1",
-		"webpack-cli": "^3.1.2"
+		"webpack-cli": "^3.3.12"
 	},
 	"dependencies": {
 		"color": "^1.0.3",
